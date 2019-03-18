@@ -7,8 +7,8 @@ This module lets you practice:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Aaron Wilkin, their colleagues,
-         and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         and Colin Balitewicz.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 import math
@@ -31,7 +31,7 @@ def main():
     # -------------------------------------------------------------------------
 
     run_test_generate_points_on_circle()
-    # run_test_draw_points_on_circle()
+    run_test_draw_points_on_circle()
     # run_test_pizza()
     # run_test_polygon()
     # run_test_fancy_polygon()
@@ -40,7 +40,7 @@ def main():
 def run_test_generate_points_on_circle():
     """ Tests the   generate_points_on_circle   function. """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE: 2. Implement this TEST function.
     #   It TESTS the  generate_points_on_circle  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test (that YOU write).
     #
@@ -67,12 +67,19 @@ def run_test_generate_points_on_circle():
     print('Expected:', expected)
     print('Actual:  ', answer)
 
+    circle_2=rg.Circle(rg.Point(200,100),50)
+    expected_2=[rg.Point(250,100),rg.Point(200,150),rg.Point(150,100),rg.Point(200,50)]
+    actual_2=generate_points_on_circle(circle_2,4)
+    print('Expected_2',expected_2)
+    print('Answer_2',actual_2)
     # -------------------------------------------------------------------------
     # Test 2:  (YOU write THIS test)
     # -------------------------------------------------------------------------
 
 
 def generate_points_on_circle(circle_for_points, number_of_points_to_generate):
+
+
     """
     What comes in:
       -- an rg.Circle
@@ -141,7 +148,7 @@ def generate_points_on_circle(circle_for_points, number_of_points_to_generate):
 def run_test_draw_points_on_circle():
     """ Tests the   draw_points_on_circle   function. """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement this TEST function.
+    # DONE: 3. Implement this TEST function.
     #   It TESTS the   draw_points_on_circle   function defined below.
     #   Include at least ** 1 ** ADDITIONAL test (that YOU write).
     #
@@ -178,9 +185,21 @@ def run_test_draw_points_on_circle():
     # -------------------------------------------------------------------------
     # Test 4:  (YOU write THIS test)
     # -------------------------------------------------------------------------
-
+    window_2=rg.RoseWindow(1500,800)
+    circle_2=rg.Circle(rg.Point(750,400),350)
+    circle_2.fill_color='black'
+    draw_points_on_circle(window_2,circle_2,100,'white')
+    window_2.close_on_mouse_click()
 
 def draw_points_on_circle(window, circle, number_of_points, color):
+    x=generate_points_on_circle(circle,number_of_points)
+    for k in range(len(x)):
+        circle_2=rg.Circle(x[k],10)
+        circle_2.fill_color=color
+        circle.attach_to(window)
+        circle_2.attach_to(window)
+        x[k].attach_to(window)
+        window.render()
     """
     What comes in:
       -- an rg.RoseWindow
@@ -216,7 +235,7 @@ def draw_points_on_circle(window, circle, number_of_points, color):
       :type color:            str
     """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
