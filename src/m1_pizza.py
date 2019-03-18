@@ -31,10 +31,10 @@ def main():
     # -------------------------------------------------------------------------
 
     run_test_generate_points_on_circle()
-    run_test_draw_points_on_circle()
-    # run_test_pizza()
-    # run_test_polygon()
-    # run_test_fancy_polygon()
+    #run_test_draw_points_on_circle()
+    #run_test_pizza()
+    #run_test_polygon()
+    run_test_fancy_polygon()
 
 
 def run_test_generate_points_on_circle():
@@ -249,7 +249,7 @@ def draw_points_on_circle(window, circle, number_of_points, color):
 def run_test_pizza():
     """ Tests the   pizza   function. """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement this TEST function.
+    # DONE: 5. Implement this TEST function.
     #   It TESTS the   pizza   function defined below.
     #   Include at least ** 1 ** ADDITIONAL test (that YOU write).
     #
@@ -292,9 +292,22 @@ def run_test_pizza():
     #     -- a large number of thin black lines
     #     -- on a yellow-filled circle.
     # -------------------------------------------------------------------------
+    window_4=rg.RoseWindow()
+    circle_4=rg.Circle(rg.Point(200,200),100)
+    circle.fill_color='yellow'
+    pizza(window_4,circle_4,200,'red',1)
+    window_4.close_on_mouse_click()
 
 
 def pizza(window, circle, number_of_slices, color, thickness):
+    x=generate_points_on_circle(circle,number_of_slices)
+    circle.attach_to(window)
+    for k in range(number_of_slices):
+        line=rg.Line(x[k],circle.center)
+        line.attach_to(window)
+        line.color=color
+        line.thickness=thickness
+        window.render()
     """
     What comes in:
       -- an rg.RoseWindow
@@ -324,7 +337,7 @@ def pizza(window, circle, number_of_slices, color, thickness):
       :type thickness:        int
     """
     # -------------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPLEMENTATION REQUIREMENT:
@@ -337,7 +350,7 @@ def pizza(window, circle, number_of_slices, color, thickness):
 def run_test_polygon():
     """ Tests the   polygon   function. """
     # -------------------------------------------------------------------------
-    # TODO: 7. Implement this TEST function.
+    # DONE: 7. Implement this TEST function.
     #   It TESTS the   polygon   function defined below.
     #   Include at least ** 1 ** ADDITIONAL test (that YOU write).
     #
@@ -369,9 +382,27 @@ def run_test_polygon():
     # -------------------------------------------------------------------------
     # Test 3:  (YOU write THIS test)
     # -------------------------------------------------------------------------
-
-
+    window_2=rg.RoseWindow()
+    circle_2=rg.Circle(rg.Point(200,200),100)
+    circle.fill_color='green'
+    polygon(window_2,circle_2,10,'black',2)
+    window_2.close_on_mouse_click()
 def polygon(window, circle, number_of_segments, color, thickness):
+    x=generate_points_on_circle(circle,number_of_segments)
+    for k in range(number_of_segments):
+        if k<number_of_segments-1:
+            line=rg.Line(x[k],x[k+1])
+            line.thickness=thickness
+            line.color=color
+            line.attach_to(window)
+            window.render()
+        else:
+            line=rg.Line(x[k],x[0])
+            line.thickness = thickness
+            line.color = color
+            line.attach_to(window)
+            window.render()
+        circle.attach_to(window)
     """
     What comes in:
       -- an rg.RoseWindow
@@ -466,8 +497,22 @@ def run_test_fancy_polygon():
 
 def fancy_polygon(window, circle, number_of_lines, hops_to_next_point, color,
                   thickness):
-    """
-    What comes in:
+    x=generate_points_on_circle(circle,number_of_lines)
+    circle.attach_to(window)
+    for k in range(number_of_lines):
+        if k+hops_to_next_point<len(x):
+            line=rg.Line(x[k],x[k+hops_to_next_point])
+            line.attach_to(window)
+            line.color=color
+            line.thickness=thickness
+            window.render()
+        else:
+            line=rg.Line(x[k],x[hops_to_next_point-len(x)+k])
+            line.attach_to(window)
+            line.color=color
+            line.thickness=thickness
+            window.render()
+    """What comes in:
       -- an rg.RoseWindow
       -- an rg.Circle
       -- an integer >= 2 that specifies how many rg.Lines
