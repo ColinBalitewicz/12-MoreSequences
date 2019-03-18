@@ -31,8 +31,8 @@ def main():
     # -------------------------------------------------------------------------
 
     run_test_generate_points_on_circle()
-    #run_test_draw_points_on_circle()
-    #run_test_pizza()
+    run_test_draw_points_on_circle()
+    run_test_pizza()
     #run_test_polygon()
     run_test_fancy_polygon()
 
@@ -493,8 +493,11 @@ def run_test_fancy_polygon():
     #   For all these, filling the circles with one color and using
     #   a contrasting color for the lines makes them especially pretty.
     # -------------------------------------------------------------------------
-
-
+    window=rg.RoseWindow()
+    circle=rg.Circle(rg.Point(200,200),100)
+    circle.fill_color='black'
+    fancy_polygon(window,circle,20,3,'yellow',1)
+    window.close_on_mouse_click()
 def fancy_polygon(window, circle, number_of_lines, hops_to_next_point, color,
                   thickness):
     x=generate_points_on_circle(circle,number_of_lines)
